@@ -11,7 +11,7 @@ A freelance project manager app to track client projects, deadlines, deliverable
 - **Invoice Status**: Monitor invoice status (Not Invoiced, Invoiced, Paid, Overdue)
 - **Priority Levels**: Color-coded priority levels (High/Medium/Low)
   - High: Red border
-  - Medium: Yellow/Orange border
+  - Medium: Yellow border
   - Low: Green border
 - **Client Rating**: yes/no rating to track which clients to work with again
 - **Edit & Delete**: Full CRUD functionality for projects
