@@ -2,6 +2,8 @@
 
 A freelance project manager app to track client projects, deadlines, deliverables, hours, and invoice status.
 
+<img width="1590" height="530" alt="image" src="https://github.com/user-attachments/assets/b80aac43-afb4-4548-90ce-b686f5779be5" />
+
 ## Features
 
 - **Track Projects**: Add and manage client projects with deadlines and deliverables
@@ -11,7 +13,7 @@ A freelance project manager app to track client projects, deadlines, deliverable
   - High: Red border
   - Medium: Yellow/Orange border
   - Low: Green border
-- **Client Rating**: Thumbs up/down to track which clients to work with again
+- **Client Rating**: yes/no rating to track which clients to work with again
 - **Edit & Delete**: Full CRUD functionality for projects
 
 ## Installation
@@ -45,8 +47,8 @@ A freelance project manager app to track client projects, deadlines, deliverable
   - hours (Number)
   - invoiceStatus (String: Not Invoiced, Invoiced, Paid, Overdue)
   - priority (String: High, Medium, Low)
-  - thumbsUp (Number)
-  - thumbsDown (Number)
+  - rated (Number)
+  - rated (Number)
   - timestamps (createdAt, updatedAt)
 
 ## Database
