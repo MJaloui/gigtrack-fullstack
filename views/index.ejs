@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>GigTrack</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="page-header text-center">
+            <h1><span class="fa fa-briefcase"></span> GigTrack</h1>
+            <p class="lead">Freelance Project Manager</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a href="/add-project" class="btn btn-success btn-lg">
+                    <i class="fa fa-plus"></i> Add New Project
+                </a>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-md-12">
+                <div class="projects-grid">
+                    <% if (projects && projects.length> 0) { %>
+                        <% for(var i=0; i<projects.length; i++) {%>
+                            <div class="project-card priority-<%= projects[i].priority.toLowerCase() %>">
+                                <div class="project-header">
+                                    <h3>
+                                        <%= projects[i].projectName || 'Untitled Project' %>
+                                    </h3>
+                                    <span class="priority-badge priority-<%= projects[i].priority.toLowerCase() %>">
+                                        <%= projects[i].priority %>
+                                    </span>
+                                </div>
+
+                                <div class="project-details">
+                                    <p><strong>Client:</strong>
+                                        <%= projects[i].clientName || 'N/A' %>
+                                    </p>
+                                    <p><strong>Deadline:</strong>
+                                        <% if (projects[i].deadline) { %>
+                                            <%= new Date(projects[i].deadline).toLocaleDateString() %>
+                                                <% } else { %>
+                                                    No deadline set
+                                                    <% } %>
+                                    </p>
+                                    <p><strong>Deliverables:</strong>
+                                        <%= projects[i].deliverables || 'No deliverables listed' %>
+                                    </p>
+                                    <p><strong>Hours Logged:</strong>
+                                        <%= projects[i].hours || 0 %> hrs
+                                    </p>
+                                    <p><strong>Invoice Status:</strong>
+                                        <span
+                                            class="invoice-status invoice-<%= projects[i].invoiceStatus ? projects[i].invoiceStatus.replace(/\s+/g, '-').toLowerCase() : 'not-invoiced' %>">
+                                            <%= projects[i].invoiceStatus || 'Not Invoiced' %>
+                                        </span>
+                                    </p>
+                                </div>
+
+                                <div class="project-actions">
+                                    <div class="rating-section">
+                                        <p class="rating-question"><strong>Work with this client again?</strong></p>
+                                        <p><strong>Client rating:</strong>
+                                            <span class="rating-value" data-project-id="<%= projects[i]._id.toString() %>"><%= typeof projects[i].rating === 'number' ? projects[i].rating : 5 %></span> / 10
+                                        </p>
+                                        <div class="rating-buttons">
+                                            <button class="rating-button increase-rating"
+                                                data-project-id="<%= projects[i]._id.toString() %>" data-action="increment">
+                                                <i class="fa fa-plus"></i> Increase
+                                            </button>
+                                            <button class="rating-button decrease-rating"
+                                                data-project-id="<%= projects[i]._id.toString() %>" data-action="decrement">
+                                                <i class="fa fa-minus"></i> Decrease
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="action-buttons">
+                                        <a href="/edit-project/<%= projects[i]._id %>" class="btn btn-warning btn-sm">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                        <button class="btn btn-danger btn-sm delete-btn"
+                                            data-project-id="<%= projects[i]._id.toString() %>">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                                <% } else { %>
+                                    <div class="col-md-12">
+                                        <div class="alert alert-info">
+                                            <h4>No projects yet!</h4>
+                                            <p>Start tracking your freelance projects by clicking "Add New Project"
+                                                above.</p>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="main.js"></script>
+</body>
+
+</html>
