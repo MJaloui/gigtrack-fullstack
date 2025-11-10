@@ -1,23 +1,26 @@
+//help with copilot troubleshooting syntax
+
 <!doctype html>
 <html>
+
 <head>
     <title>GigTrack</title>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<div class="container">
 
-    <div class="page-header">
-        <h1><i class="fa fa-plus"></i> Add New Project</h1>
-        <a href="/" class="cancelButton">Back to Projects</a>
-    </div>
+<body class="form-page">
+    <div class="form-shell">
+        <header class="form-header">
+            <span class="form-badge"><i class="fa fa-plus"></i> New engagement</span>
+            <h1>Create a project</h1>
+            <p>Capture the essentials before you dive in: client details, deliverables, timelines, and billing status.</p>
+        </header>
 
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="well">
-                <form action="/add-project" method="POST" id="addProjectForm">
+        <div class="form-card">
+            <form action="/add-project" method="POST" id="addProjectForm" class="stacked-form">
+                <div class="form-grid">
                     <div class="form-group">
                         <label for="clientName">Client Name *</label>
                         <input type="text" class="form-control" id="clientName" name="clientName" required placeholder="Enter client name">
@@ -31,11 +34,6 @@
                     <div class="form-group">
                         <label for="deadline">Deadline *</label>
                         <input type="date" class="form-control" id="deadline" name="deadline" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="deliverables">Deliverables *</label>
-                        <textarea class="form-control" id="deliverables" name="deliverables" rows="3" required placeholder="List project deliverables"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -61,25 +59,32 @@
                             <option value="Overdue">Overdue</option>
                         </select>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="rating">Client Rating (0-10)</label>
-                        <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" value="5">
-                    </div>
+                <div class="form-group">
+                    <label for="deliverables">Deliverables *</label>
+                    <textarea class="form-control" id="deliverables" name="deliverables" rows="4" required placeholder="List project deliverables"></textarea>
+                </div>
 
-                    <div class="form-actions">
-                        <button type="submit" class="submitButton">
-                            Add Project
-                        </button>
-                        <a href="/" class="cancelButton">Cancel</a>
-                    </div>
-                </form>
-            </div>
+                <!-- <div class="form-group">
+                    <label for="rating">Client Rating (0-10)</label>
+                    <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" value="5">
+                </div> -->
+
+                <div class="form-actions">
+                    <button type="submit" class="button button-primary full-width">
+                        <i class="fa fa-check"></i> Add project
+                    </button>
+                    <a href="/" class="button button-ghost full-width">
+                        Cancel
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 </body>
-</html>
 
+</html>

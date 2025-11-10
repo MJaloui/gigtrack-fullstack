@@ -6,87 +6,100 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<div class="container">
+<body class="form-page">
+<div class="form-shell">
 
-    <div class="page-header">
-        <h1><i class="fa fa-edit"></i> Edit Project</h1>
-        <a href="/" class="cancelButton">Back to Projects</a>
-    </div>
+    <header class="form-header">
+        <span class="form-badge"><i class="fa fa-edit"></i> Edit engagement</span>
+        <h1>Update project details</h1>
+        <p>Fine-tune scope, timelines, and billing so your client data always stays accurate.</p>
+    </header>
 
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="well">
-                <form action="/edit-project/<%= projectId %>" method="POST" id="editProjectForm">
-                    <div class="form-group">
-                        <label for="clientName">Client Name *</label>
-                        <input type="text" class="form-control" id="clientName" name="clientName" required 
-                               value="<%= project ? project.clientName : '' %>">
-                    </div>
+    <div class="form-card">
+        <form action="/edit-project/<%= projectId %>" method="POST" id="editProjectForm" class="stacked-form">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="clientName">Client Name *</label>
+                    <input type="text" class="form-control" id="clientName" name="clientName" required value="<%= project ? project.clientName : '' %>">
+                </div>
 
-                    <div class="form-group">
-                        <label for="projectName">Project Name *</label>
-                        <input type="text" class="form-control" id="projectName" name="projectName" required 
-                               value="<%= project ? project.projectName : '' %>">
-                    </div>
+                <div class="form-group">
+                    <label for="projectName">Project Name *</label>
+                    <input type="text" class="form-control" id="projectName" name="projectName" required value="<%= project ? project.projectName : '' %>">
+                </div>
 
-                    <div class="form-group">
-                        <label for="deadline">Deadline *</label>
-                        <input type="date" class="form-control" id="deadline" name="deadline" required 
-                               value="<%= project && project.deadline ? new Date(project.deadline).toISOString().split('T')[0] : '' %>">
-                    </div>
+                <div class="form-group">
+                    <label for="deadline">Deadline *</label>
+                    <input type="date" class="form-control" id="deadline" name="deadline" required value="<%= project && project.deadline ? new Date(project.deadline).toISOString().split('T')[0] : '' %>">
+                </div>
 
-                    <div class="form-group">
-                        <label for="deliverables">Deliverables *</label>
-                        <textarea class="form-control" id="deliverables" name="deliverables" rows="3" required><%= project ? project.deliverables : '' %></textarea>
-                    </div>
+                <div class="form-group">
+                    <label for="hours">Hours Logged</label>
+                    <input type="number" class="form-control" id="hours" name="hours" min="0" step="0.5" value="<%= project ? project.hours || 0 : 0 %>">
+                </div>
 
-                    <div class="form-group">
-                        <label for="hours">Hours Logged</label>
-                        <input type="number" class="form-control" id="hours" name="hours" min="0" step="0.5" 
-                               value="<%= project ? project.hours || 0 : 0 %>">
-                    </div>
+                <div class="form-group">
+                    <label for="priority">Priority *</label>
+                    <select class="form-control" id="priority" name="priority" required>
+                        <option value="Low" <%= project && project.priority === 'Low' ? 'selected' : '' %>>Low</option>
+                        <option value="Medium" <%= project && project.priority === 'Medium' ? 'selected' : '' %>>Medium</option>
+                        <option value="High" <%= project && project.priority === 'High' ? 'selected' : '' %>>High</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label for="priority">Priority *</label>
-                        <select class="form-control" id="priority" name="priority" required>
-                            <option value="Low" <%= project && project.priority === 'Low' ? 'selected' : '' %>>Low</option>
-                            <option value="Medium" <%= project && project.priority === 'Medium' ? 'selected' : '' %>>Medium</option>
-                            <option value="High" <%= project && project.priority === 'High' ? 'selected' : '' %>>High</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="invoiceStatus">Invoice Status *</label>
-                        <select class="form-control" id="invoiceStatus" name="invoiceStatus" required>
-                            <option value="Not Invoiced" <%= project && project.invoiceStatus === 'Not Invoiced' ? 'selected' : '' %>>Not Invoiced</option>
-                            <option value="Invoiced" <%= project && project.invoiceStatus === 'Invoiced' ? 'selected' : '' %>>Invoiced</option>
-                            <option value="Paid" <%= project && project.invoiceStatus === 'Paid' ? 'selected' : '' %>>Paid</option>
-                            <option value="Overdue" <%= project && project.invoiceStatus === 'Overdue' ? 'selected' : '' %>>Overdue</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rating">Client Rating (0-10)</label>
-                        <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" value="<%= project && typeof project.rating === 'number' ? project.rating : 5 %>">
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="submitButton">
-                            <i class="save"></i> Save Changes
-                        </button>
-                        <a href="/" class="cancelButton">Cancel</a>
-                        <button type="button" class="deleteButton" id="deleteBtn">
-                            <i class="trash"></i> Delete Project
-                        </button>
-                    </div>
-                </form>
+                <div class="form-group">
+                    <label for="invoiceStatus">Invoice Status *</label>
+                    <select class="form-control" id="invoiceStatus" name="invoiceStatus" required>
+                        <option value="Not Invoiced" <%= project && project.invoiceStatus === 'Not Invoiced' ? 'selected' : '' %>>Not Invoiced</option>
+                        <option value="Invoiced" <%= project && project.invoiceStatus === 'Invoiced' ? 'selected' : '' %>>Invoiced</option>
+                        <option value="Paid" <%= project && project.invoiceStatus === 'Paid' ? 'selected' : '' %>>Paid</option>
+                        <option value="Overdue" <%= project && project.invoiceStatus === 'Overdue' ? 'selected' : '' %>>Overdue</option>
+                    </select>
+                </div>
             </div>
-        </div>
+
+            <div class="form-group">
+                <label for="deliverables">Deliverables *</label>
+                <textarea class="form-control" id="deliverables" name="deliverables" rows="4" required><%= project ? project.deliverables : '' %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="rating">Client Rating (0-10)</label>
+                <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" value="<%= project && typeof project.rating === 'number' ? project.rating : 5 %>">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="button button-primary full-width"><i class="fa fa-check"></i> Save changes</button>
+                <a href="/" class="button button-ghost full-width">Cancel</a>
+                <button type="button" class="button button-danger full-width" id="deleteBtn"><i class="fa fa-trash"></i> Delete project</button>
+            </div>
+        </form>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script>
+    (function(){
+        var deleteBtn = document.getElementById('deleteBtn');
+        if(deleteBtn){
+            deleteBtn.addEventListener('click', function(){
+                if(!confirm('Delete this project? This cannot be undone.')){ return; }
+                fetch('/projects', {
+                    method: 'delete',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ projectId: '<%= projectId %>' })
+                }).then(function(){
+                    window.location.href = '/';
+                }).catch(function(err){
+                    console.error(err);
+                    alert('Something went wrong while deleting the project.');
+                });
+            });
+        }
+    })();
+</script>
 </body>
 </html>
 
