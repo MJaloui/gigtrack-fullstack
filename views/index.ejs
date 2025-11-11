@@ -1,4 +1,4 @@
-// some help with co-pilot troubleshooting syntax
+<!-- some help with co-pilot troubleshooting syntax -->
 <!doctype html>
 <html>
 
@@ -10,124 +10,153 @@
 </head>
 
 <body class="dashboard">
-    <% const projectCount = projects ? projects.length : 0;
-       const overdueCount = projects ? projects.filter(function(p){ return p.invoiceStatus === 'Overdue'; }).length : 0;
-       const paidCount = projects ? projects.filter(function(p){ return p.invoiceStatus === 'Paid'; }).length : 0; %>
-    <div class="page-shell">
-        <header class="hero">
-            <div class="hero-copy">
-                <span class="hero-badge"><i class="fa fa-rocket"></i> Freelance control center</span>
-                <h1><span class="fa fa-briefcase"></span> GigTrack</h1>
-                <p>See every client commitment, invoice status, and rating at a glance. Stay proactive and keep your pipeline clear.</p>
-                <div class="hero-actions">
-                    <a href="/add-project" class="button button-primary"><i class="fa fa-plus"></i> Add new project</a>
+    <% const projectCount=projects ? projects.length : 0; const overdueCount=projects ? projects.filter(function(p){
+        return p.invoiceStatus==='Overdue' ; }).length : 0; const paidCount=projects ? projects.filter(function(p){
+        return p.invoiceStatus==='Paid' ; }).length : 0; %>
+        <div class="page-shell">
+            <header class="hero">
+                <div class="hero-copy">
+                    <span class="hero-badge"><i class="fa fa-rocket"></i> Freelance control center</span>
+                    <h1><span class="fa fa-briefcase"></span> GigTrack</h1>
+                    <p>See every client commitment, invoice status, and rating at a glance. Stay proactive and keep your
+                        pipeline clear.</p>
+                    <div class="hero-actions">
+                        <a href="/add-project" class="button button-primary"><i class="fa fa-plus"></i> Add new
+                            project</a>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-stats">
-                <article class="stat-card">
-                    <span class="stat-label">Active projects</span>
-                    <span class="stat-value"><%= projectCount %></span>
-                </article>
-                <article class="stat-card">
-                    <span class="stat-label">Paid invoices</span>
-                    <span class="stat-value"><%= paidCount %></span>
-                </article>
-                <article class="stat-card alert">
-                    <span class="stat-label">Overdue invoices</span>
-                    <span class="stat-value"><%= overdueCount %></span>
-                </article>
-            </div>
-        </header>
-
-        <section id="projects" class="projects-section">
-            <div class="section-heading">
-                <div>
-                    <h2>Projects</h2>
-                    <p>Keep deliverables, budgets, and invoice statuses aligned for every engagement.</p>
+                <div class="hero-stats">
+                    <article class="stat-card">
+                        <span class="stat-label">Active projects</span>
+                        <span class="stat-value">
+                            <%= projectCount %>
+                        </span>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">Paid invoices</span>
+                        <span class="stat-value">
+                            <%= paidCount %>
+                        </span>
+                    </article>
+                    <article class="stat-card alert">
+                        <span class="stat-label">Overdue invoices</span>
+                        <span class="stat-value">
+                            <%= overdueCount %>
+                        </span>
+                    </article>
                 </div>
-                <span class="projects-count"><%= projectCount %> in progress</span>
-            </div>
+            </header>
 
-            <% if (projects && projects.length > 0) { %>
-                <div class="projects-grid">
-                    <% projects.forEach(function(project) { %>
-                        <article class="project-card priority-<%= project.priority.toLowerCase() %>">
-                            <span class="project-accent"></span>
-                            <header class="project-card__header">
-                                <div>
-                                    <h3><%= project.projectName || 'Untitled project' %></h3>
-                                    <p class="project-client">Client • <span><%= project.clientName || 'N/A' %></span></p>
-                                </div>
-                                <span class="priority-badge priority-<%= project.priority.toLowerCase() %>"><%= project.priority %></span>
-                            </header>
+            <section id="projects" class="projects-section">
+                <div class="section-heading">
+                    <div>
+                        <h2>Projects</h2>
+                        <p>Keep deliverables, budgets, and invoice statuses aligned for every engagement.</p>
+                    </div>
+                    <span class="projects-count">
+                        <%= projectCount %> in progress
+                    </span>
+                </div>
 
-                            <ul class="project-details">
-                                <li>
-                                    <span class="label">Deadline</span>
-                                    <strong>
-                                        <% if (project.deadline) { %>
-                                            <%= new Date(project.deadline).toLocaleDateString() %>
-                                        <% } else { %>
-                                            No deadline set
-                                        <% } %>
-                                    </strong>
-                                </li>
-                                <li>
-                                    <span class="label">Deliverables</span>
-                                    <strong><%= project.deliverables || 'No deliverables listed' %></strong>
-                                </li>
-                                <li>
-                                    <span class="label">Hours logged</span>
-                                    <strong><%= project.hours || 0 %> hrs</strong>
-                                </li>
-                                <li>
-                                    <span class="label">Invoice status</span>
-                                    <strong>
-                                        <span class="invoice-status invoice-<%= project.invoiceStatus ? project.invoiceStatus.replace(/\s+/g, '-').toLowerCase() : 'not-invoiced' %>">
-                                            <%= project.invoiceStatus || 'Not Invoiced' %>
-                                        </span>
-                                    </strong>
-                                </li>
-                            </ul>
-
-                            <div class="project-actions">
-                                <div class="rating-block">
-                                    <p class="rating-title">Client rating</p>
-                                    <div class="rating-display">
-                                        <span class="rating-value" data-project-id="<%= project._id.toString() %>"><%= typeof project.rating === 'number' ? project.rating : 5 %></span>
-                                        <span class="rating-scale">/ 10</span>
+                <% if (projects && projects.length> 0) { %>
+                    <div class="projects-grid">
+                        <% projects.forEach(function(project) { %>
+                            <article class="project-card priority-<%= project.priority.toLowerCase() %>">
+                                <span class="project-accent"></span>
+                                <header class="project-card__header">
+                                    <div>
+                                        <h3>
+                                            <%= project.projectName || 'Untitled project' %>
+                                        </h3>
+                                        <p class="project-client">Client • <span>
+                                                <%= project.clientName || 'N/A' %>
+                                            </span></p>
                                     </div>
-                                    <div class="rating-buttons">
-                                        <button class="rating-button increase-rating" data-project-id="<%= project._id.toString() %>" data-action="increment">
-                                            <i class="fa fa-arrow-up"></i> Increase
-                                        </button>
-                                        <button class="rating-button decrease-rating" data-project-id="<%= project._id.toString() %>" data-action="decrement">
-                                            <i class="fa fa-arrow-down"></i> Decrease
-                                        </button>
+                                    <span class="priority-badge priority-<%= project.priority.toLowerCase() %>">
+                                        <%= project.priority %>
+                                    </span>
+                                </header>
+
+                                <ul class="project-details">
+                                    <li>
+                                        <span class="label">Deadline</span>
+                                        <strong>
+                                            <% if (project.deadline) { %>
+                                                <%= new Date(project.deadline).toLocaleDateString() %>
+                                                    <% } else { %>
+                                                        No deadline set
+                                                        <% } %>
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <span class="label">Deliverables</span>
+                                        <strong>
+                                            <%= project.deliverables || 'No deliverables listed' %>
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <span class="label">Hours logged</span>
+                                        <strong>
+                                            <%= project.hours || 0 %> hrs
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <span class="label">Invoice status</span>
+                                        <strong>
+                                            <span
+                                                class="invoice-status invoice-<%= project.invoiceStatus ? project.invoiceStatus.replace(/\s+/g, '-').toLowerCase() : 'not-invoiced' %>">
+                                                <%= project.invoiceStatus || 'Not Invoiced' %>
+                                            </span>
+                                        </strong>
+                                    </li>
+                                </ul>
+
+                                <div class="project-actions">
+                                    <div class="rating-block">
+                                        <p class="rating-title">Client rating</p>
+                                        <div class="rating-display">
+                                            <span class="rating-value" data-project-id="<%= project._id.toString() %>">
+                                                <%= typeof project.rating==='number' ? project.rating : 5 %>
+                                            </span>
+                                            <span class="rating-scale">/ 10</span>
+                                        </div>
+                                        <div class="rating-buttons">
+                                            <button class="rating-button increase-rating"
+                                                data-project-id="<%= project._id.toString() %>" data-action="increment">
+                                                <i class="fa fa-arrow-up"></i> Increase
+                                            </button>
+                                            <button class="rating-button decrease-rating"
+                                                data-project-id="<%= project._id.toString() %>" data-action="decrement">
+                                                <i class="fa fa-arrow-down"></i> Decrease
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <a href="/edit-project/<%= project._id %>" class="button button-ghost"><i
+                                                class="fa fa-pencil"></i> Edit</a>
+                                        <button class="button button-danger delete-btn"
+                                            data-project-id="<%= project._id.toString() %>"><i class="fa fa-trash"></i>
+                                            Delete</button>
                                     </div>
                                 </div>
-                                <div class="action-buttons">
-                                    <a href="/edit-project/<%= project._id %>" class="button button-ghost"><i class="fa fa-pencil"></i> Edit</a>
-                                    <button class="button button-danger delete-btn" data-project-id="<%= project._id.toString() %>"><i class="fa fa-trash"></i> Delete</button>
-                                </div>
-                            </div>
-                        </article>
-                    <% }); %>
-                </div>
-            <% } else { %>
-                <div class="empty-state">
-                    <span class="empty-icon"><i class="fa fa-flag"></i></span>
-                    <h3>No projects yet</h3>
-                    <p>Kick off your freelance pipeline by logging your first engagement.</p>
-                    <a href="/add-project" class="button button-primary"><i class="fa fa-plus"></i> Create your first project</a>
-                </div>
-            <% } %>
-        </section>
-    </div>
+                            </article>
+                            <% }); %>
+                    </div>
+                    <% } else { %>
+                        <div class="empty-state">
+                            <span class="empty-icon"><i class="fa fa-flag"></i></span>
+                            <h3>No projects yet</h3>
+                            <p>Kick off your freelance pipeline by logging your first engagement.</p>
+                            <a href="/add-project" class="button button-primary"><i class="fa fa-plus"></i> Create your
+                                first project</a>
+                        </div>
+                        <% } %>
+            </section>
+        </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-    <script src="main.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="main.js"></script>
 </body>
 
 </html>
