@@ -17,26 +17,6 @@ A freelance project manager app to track client projects, deadlines, deliverable
 - **Client Rating**: yes/no rating to track which clients to work with again
 - **Edit & Delete**: Full CRUD functionality for projects
 
-## Installation
-
-1. Navigate to the project folder:
-   ```bash
-   cd gig-track
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Update `config/database.js` with your MongoDB connection string if needed
-
-4. Run the server:
-   ```bash
-   node server.js
-   ```
-
-5. Open browser to `http://localhost:8080`
 
 ## MongoDB Collections
 
