@@ -2,6 +2,7 @@
 
 A freelance project manager app to track client projects, deadlines, deliverables, hours, and invoice status.
 
+<img width="1433" height="688" alt="image" src="https://github.com/user-attachments/assets/c7bf5500-14ee-484a-8d25-2e5abd4435f9" />
 
 
 ## Features
